@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,700&display=swap');
+
+/* Editorial New Italic — for Superschool moment only */
+@font-face {
+  font-family: 'EditorialNew-Italic';
+  src: url('/fonts/EditorialNew-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: block;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* GSAP controls all scrolling — disable native smooth */
+  overflow-x: hidden;
+}
+
+body {
+  background: #07080C;
+  color: #F0F0F5;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none; /* Custom cursor takes over */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll container — tall enough for all scenes */
+/* Total scroll height = 11 × 100vh = 1100vh */
+/* Each scene gets 100vh of scroll travel */
+#scroll-container {
+  height: 1100vh;
+  position: relative;
+}
+
+/* Sticky canvas layer — stays fixed while scroll drives animations */
+#sticky-layer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* WebGL canvas — always behind everything */
+#particle-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Background color layer — animated by GSAP */
+#bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #07080C;
+  pointer-events: none;
+  transition: none; /* GSAP handles all transitions */
+}
+
+/* All scene content sits here */
+#scene-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Nav sits above everything */
+#nav-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* Cursor layer — topmost */
+#cursor-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Typography base classes */
+.type-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400; /* Bebas only has one weight */
+  letter-spacing: 0.02em;
+  line-height: 0.92;
+}
+
+.type-body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.type-label {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6B7280;
+}
+
+.type-editorial {
+  font-family: 'EditorialNew-Italic', 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Signal line — the recurring visual element */
+.signal-line {
+  position: absolute;
+  height: 1px;
+  background: #E8FF47;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(232, 255, 71, 0.3);
+  color: #F0F0F5;
+}
